@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+#
+# Performs checks of various things.
+#
+# Warning: the checks are not sophisticated.
+#
+
+echo '--------------------------------------------------------------------------------'
+
+echo 'Check for capitalization in test descriptions ...'
+egrep -rn $'(describe|it)[ ]+[\'"][A-Z]' test/*.rb
+
+echo 'Check for skip tests ...'
+egrep -rin '^[:space:]*(only|skip) ' test/*.rb
+
+# Commented out because I haven't grokked https://github.com/travis-ci/travis-yaml yet
+# echo 'Check Travis CI config file .travis.yml ...'
+# QUIET=1 travis-lint
+
+echo 'Check for tabs in source code files ...'
+egrep -rn '\t' bin/* lib/*.rb test/*.rb
+
+echo 'Check for trailing spaces in source code files ...'
+egrep -rn ' $' bin/* lib/*.rb test/*.rb
+
+echo 'Check for git stashes ...'
+git stash list
