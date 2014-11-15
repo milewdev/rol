@@ -1,8 +1,8 @@
 [![Gem Version](https://badge.fury.io/rb/rol.svg)](http://badge.fury.io/rb/rol)
-[![Build Status](https://travis-ci.org/milewdev/devenv-rubygem.svg?branch=master)](https://travis-ci.org/milewdev/devenv-rubygem)
-[![Code Climate](https://codeclimate.com/github/milewdev/devenv-rubygem.png)](https://codeclimate.com/github/milewdev/devenv-rubygem)
-[![Coverage Status](https://coveralls.io/repos/milewdev/devenv-rubygem/badge.png?branch=master)](https://coveralls.io/r/milewdev/devenv-rubygem?branch=master)
-[![Dependencies](https://gemnasium.com/milewdev/devenv-rubygem.svg)](https://gemnasium.com/milewdev/devenv-rubygem)
+[![Build Status](https://travis-ci.org/milewdev/rol.svg?branch=master)](https://travis-ci.org/milewdev/rol)
+[![Code Climate](https://codeclimate.com/github/milewdev/rol.png)](https://codeclimate.com/github/milewdev/rol)
+[![Coverage Status](https://coveralls.io/repos/milewdev/rol/badge.png?branch=master)](https://coveralls.io/r/milewdev/rol?branch=master)
+[![Dependencies](https://gemnasium.com/milewdev/rol.svg)](https://gemnasium.com/milewdev/rol)
 
 
 ### What is rol?

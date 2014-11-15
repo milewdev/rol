@@ -1,5 +1,5 @@
 #
-# Vagrantfile to create devenv-rubygem development environment.
+# Vagrantfile to create rol development environment.
 #
 
 
