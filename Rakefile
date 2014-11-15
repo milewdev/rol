@@ -24,7 +24,12 @@ end
 
 
 desc "Install gem locally (does an uninstall first)"
-task :install do
-  system "gem uninstall -x rol"
+task :install => :uninstall do
   system "gem install rol-#{Rol::Version}.gem"
+end
+
+
+desc "Uninstall gem locally"
+task :uninstall do
+  system "gem uninstall -x rol"
 end
