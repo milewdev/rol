@@ -26,5 +26,5 @@ $ git tag
 
 ### Publish to RubyGems.org
 ```Shell
-$ gem push roughgem-x.y.z.gem
+$ gem push rol-x.y.z.gem
 ```

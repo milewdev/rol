@@ -1,3 +1,3 @@
-module RoughGem
+module Rol
   Version = "0.0.1"
 end

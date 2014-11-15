@@ -1,6 +1,6 @@
 require "rake/testtask"
 require "pathname"
-require_relative "lib/roughgem/version"
+require_relative "lib/rol/version"
 
 
 task :default => [ :test ]
@@ -19,12 +19,12 @@ end
 
 desc "Build gem"
 task :build do
-  system "gem build roughgem.gemspec"
+  system "gem build rol.gemspec"
 end
 
 
 desc "Install gem locally (does an uninstall first)"
 task :install do
-  system "gem uninstall -x roughgem"
-  system "gem install roughgem-#{RoughGem::Version}.gem"
+  system "gem uninstall -x rol"
+  system "gem install rol-#{Rol::Version}.gem"
 end

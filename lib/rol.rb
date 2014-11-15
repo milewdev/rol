@@ -2,13 +2,14 @@
 me = File.absolute_path(__FILE__)
 Dir.glob(File.dirname(me) + '/**/*.rb') {|fn| require fn unless fn == me }
 
-module RoughGem
+module Rol
 
   #
-  # Program entry point. Responsible for <TODO>.
+  # Program entry point. Responsible for ...
+  # Also responsible for reporting errors.
   #
   def self.run(argv)
-    puts "Hello, RoughGem"
+    puts 'Hello, rol'
   end
 
 end

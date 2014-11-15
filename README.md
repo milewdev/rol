@@ -1,54 +1,16 @@
-### Copying this Template
-This is a template Ruby gem project.  To use it:
-
-- Copy this template project to a new one on github and then launch it in a vm.  For example:
-  ```
-  # Create a new_project repo in your github account, then do:
-
-  $ git clone https://github.com/milewdev/devenv-rubygem.git /Users/you/work/new_project
-  $ cd /Users/you/work/new_project
-
-  # Edit the Vagrantfile and change the PROJECT_NAME constant value at the top of
-  # the file to your new_project name, then do:
-
-  $ rm -rf .git
-  $ git init
-  $ git add .
-  $ git commit -S -m "Initial commit"
-  $ git remote add origin https://github.com/your_github_account/new_project.git
-  $ git push origin master
-
-  # This deletes everything except the Vagrantfile:
-  $ find * -maxdepth 0 -name 'Vagrantfile' -prune -o -exec rm -rf '{}' ';'
-
-  $ vagrant up --provider=vmware_fusion
-  ```
-- Register your new repo with Travis CI, Coveralls, Code Climate, and Gemnasium.
-- Replace all occurrences of roughgem and devenv-rubygem with your project name.  This includes file and directory names (e.g. lib/roughgem/roughgem.rb).
-- Modify this README file to suit your project: remove these notes, fill in the description for 'What is ...?', fix the documentation links, etc.
-- Run ./_test, ./_lint, ./_build and ./_install, and address any issues.
-- Push your changes to github.
-- Verify that [Travis CI](https://travis-ci.org), [Code Climate](https://codeclimate.com), [Coveralls](https://coveralls.io), and [Gemnasium](https://gemnasium.com/) work.
-
-<br>
-<br>
-<br>
-
-
-
-[![Gem Version](https://badge.fury.io/rb/roughgem.svg)](http://badge.fury.io/rb/roughgem)
+[![Gem Version](https://badge.fury.io/rb/rol.svg)](http://badge.fury.io/rb/rol)
 [![Build Status](https://travis-ci.org/milewdev/devenv-rubygem.svg?branch=master)](https://travis-ci.org/milewdev/devenv-rubygem)
 [![Code Climate](https://codeclimate.com/github/milewdev/devenv-rubygem.png)](https://codeclimate.com/github/milewdev/devenv-rubygem)
 [![Coverage Status](https://coveralls.io/repos/milewdev/devenv-rubygem/badge.png?branch=master)](https://coveralls.io/r/milewdev/devenv-rubygem?branch=master)
 [![Dependencies](https://gemnasium.com/milewdev/devenv-rubygem.svg)](https://gemnasium.com/milewdev/devenv-rubygem)
 
 
-### What is roughgem?
-TODO: FILL IN DESCRIPTION HERE
+### What is rol?
+Ruby object literal
 
 
 ### Documentation
-[Here](http://milewdev.github.io/roughgem.doc/) (documentation source is [here](https://github.com/milewdev/roughgem.doc)).
+[Here](http://milewdev.github.io/rol.doc/) (documentation source is [here](https://github.com/milewdev/rol.doc)).
 
 
 ### Development Setup
@@ -63,9 +25,9 @@ TODO: FILL IN DESCRIPTION HERE
 #####Install:
 In a terminal window on the host machine:
 ```
-$ mkdir -p ~/work/roughgem
-$ cd ~/work/roughgem
-$ curl -L https://raw.github.com/milewdev/roughgem/master/Vagrantfile -o Vagrantfile
+$ mkdir -p ~/work/rol
+$ cd ~/work/rol
+$ curl -L https://raw.github.com/milewdev/rol/master/Vagrantfile -o Vagrantfile
 $ vagrant up --provider=vmware_fusion
 ...
 ```
@@ -73,7 +35,7 @@ $ vagrant up --provider=vmware_fusion
 #####Check installation:
 In a terminal window on the vm (guest machine):
 ```
-$ cd ~/Documents/roughgem
+$ cd ~/Documents/rol
 $ ./_test
 --------------------------------------------------------------------------------
 /usr/local/Cellar/ruby/2.1.2_2/lib/ruby/2.1.0/rubygems/defaults/operating_system.rb:2: warning: method redefined; discarding old default_dir
@@ -107,32 +69,32 @@ pushed any and all code changes to GitHub beforehand.
 
 In a terminal window on the host machine:
 ```
-$ cd ~/work/roughgem
+$ cd ~/work/rol
 $ vagrant destroy -f
 $ cd ~
-$ rm -r ~/work/roughgem    # and possibly rm -r ~/work if it is now empty
+$ rm -r ~/work/rol    # and possibly rm -r ~/work if it is now empty
 ```
 
 
 #####Development Notes:
 - branch **master** contains the latest version of the application code.  Older releases have their own branches.
 
-- `bin/roughgem` launches the application; it simply calls the program's main entry point, RoughGem::run (`lib/roughgem/roughgem.rb`).
+- `bin/rol` launches the application; it simply calls the program's main entry point, Rol::run (`lib/rol/rol.rb`).
 
 - ./_test will run all business/unit tests.  Leave a terminal window open during development and
 run ./_test as you make changes to code.
 
 - ./_lint will run various checks against the source code, typically looking for things that cropped up in the TODO list, such as a change in naming convention; in this case, the checks will ensure that the old names are not used anywhere. Warning: the checks are not sophisticated and may report things that are in fact not erroneous.
 
-- ./_build will create the gem file roughgem-x.y.z.gem
+- ./_build will create the gem file rol-x.y.z.gem
 
 - ./_install will install the gem locally.
 
-- If you wish to modify the Vagrantfile, it is best to do so on the host machine (~/work/roughgem/Vagrantfile)
+- If you wish to modify the Vagrantfile, it is best to do so on the host machine (~/work/rol/Vagrantfile)
 so that you can easily do an edit/vagrant up/vagrant destroy cycle.  Once you have finished making
 changes, vagrant up and then in a terminal window on the vm do something like:
     ```
-    $ cd ~/Documents/roughgem
+    $ cd ~/Documents/rol
     $ cp /vagrant/Vagrantfile .
     $ git status
     ...

@@ -1,12 +1,12 @@
-require "./lib/roughgem/version"
+require "./lib/rol/version"
 
 Gem::Specification.new do |s|
-  s.name                        = "roughgem"
-  s.version                     = RoughGem::Version
-  s.homepage                    = "https://github.com/milewdev/roughgem"
-  s.summary                     = "roughgem project."
+  s.name                        = "rol"
+  s.version                     = Rol::Version
+  s.homepage                    = "https://github.com/milewdev/rol"
+  s.summary                     = "rol project."
   s.description                 = <<-EOS
-                                  roughgem project description.
+                                  rol project description.
                                   EOS
   s.author                      = "Michael Lewandowski"
   s.email                       = "milewdev@gmail.com"
@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
   s.files                       = Dir[ "lib/**/**", "LICENSE" ]
   s.require_paths               = [ "lib" ]
   s.bindir                      = "bin"
-  s.executables                 = [ "roughgem" ]
+  s.executables                 = [ "rol" ]
   s.add_development_dependency  "mocha", "~> 0"
   s.add_development_dependency  "bundler", "~> 1"
   s.add_development_dependency  "rake", "~> 10"
