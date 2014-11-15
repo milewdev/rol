@@ -4,8 +4,7 @@ module Rol
   describe Rol do
     it "says 'Hello, rol'" do
       proc do
-        @argv = []
-        Rol.run(@argv)
+        Rol.run
       end.must_output "Hello, rol\n"
     end
   end

@@ -19,10 +19,10 @@ egrep -rin '^[:space:]*(only|skip) ' test/*.rb
 # QUIET=1 travis-lint
 
 echo 'Check for tabs in source code files ...'
-egrep -rn '\t' bin/* lib/*.rb test/*.rb
+egrep -rn '\t' lib/*.rb test/*.rb
 
 echo 'Check for trailing spaces in source code files ...'
-egrep -rn ' $' bin/* lib/*.rb test/*.rb
+egrep -rn ' $' lib/*.rb test/*.rb
 
 echo 'Check for git stashes ...'
 git stash list

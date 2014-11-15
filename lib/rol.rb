@@ -8,7 +8,7 @@ module Rol
   # Program entry point. Responsible for ...
   # Also responsible for reporting errors.
   #
-  def self.run(argv)
+  def self.run
     puts 'Hello, rol'
   end
 

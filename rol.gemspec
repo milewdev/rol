@@ -16,8 +16,6 @@ Gem::Specification.new do |s|
   s.required_ruby_version       = "~> 2"
   s.files                       = Dir[ "lib/**/**", "LICENSE" ]
   s.require_paths               = [ "lib" ]
-  s.bindir                      = "bin"
-  s.executables                 = [ "rol" ]
   s.add_development_dependency  "mocha", "~> 0"
   s.add_development_dependency  "bundler", "~> 1"
   s.add_development_dependency  "rake", "~> 10"
