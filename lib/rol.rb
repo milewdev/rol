@@ -3,13 +3,13 @@ me = File.absolute_path(__FILE__)
 Dir.glob(File.dirname(me) + '/**/*.rb') {|fn| require fn unless fn == me }
 
 module Rol
-
-  #
-  # Program entry point. Responsible for ...
-  # Also responsible for reporting errors.
-  #
-  def self.run
-    puts 'Hello, rol'
+  def self.rol(hash)
+    o = Object.new
+    class << o
+      def x
+        'a'
+      end
+    end
+    o
   end
-
 end

@@ -2,10 +2,9 @@ require_relative '../test_helper'
 
 module Rol
   describe Rol do
-    it "says 'Hello, rol'" do
-      proc do
-        Rol.run
-      end.must_output "Hello, rol\n"
+    it 'returns an object with the specified attribute' do
+      o = Rol.rol({ x: 'a' })
+      o.x.must_equal 'a'
     end
   end
 end
