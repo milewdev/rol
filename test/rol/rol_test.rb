@@ -104,6 +104,17 @@ describe 'rol() argument validation' do
 end
 
 
+describe 'rol() attribute names' do
+  before do
+    @attribute_name = '~`1!2@3#4$5%6^7&8*9(0)-_=+{[]}|\:;<,>.?/'
+    @o = rol({ @attribute_name => 42 })
+  end
+  it 'does not do any validation of attribute names' do
+    @o.methods.must_include @attribute_name.to_sym
+  end
+end
+
+
 #
 # Provide Kernel.rol() as an alias for Rol.rol():
 #
