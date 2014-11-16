@@ -96,9 +96,12 @@ describe 'rol() attribute definition' do
 end
 
 
-#
-# TODO: what does rol( <SOMETHING OTHER THAN A HASH> ) do?
-#
+describe 'rol() argument validation' do
+  it 'raises an exception when the argument does not respond to #each_pair' do
+    exception = proc { rol([1,2,3]) }.must_raise ArgumentError
+    exception.message.must_equal "rol(hash): 'hash' argument must respond to #each_pair"
+  end
+end
 
 
 #
