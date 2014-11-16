@@ -14,7 +14,11 @@ module Rol
     o = Object.new
     hash.each_pair do |key, value|
       # TODO: need to check what happens if either key or value is invalid.
-      o.define_singleton_method(key) { value }
+      if value.is_a? Proc
+        o.define_singleton_method(key) { |*args| value.call(*args) }
+      else
+        o.define_singleton_method(key) { value }
+      end
     end
     o
   end

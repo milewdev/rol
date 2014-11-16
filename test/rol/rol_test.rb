@@ -1,5 +1,6 @@
 require_relative '../test_helper'
 
+
 # #
 # # o = rol({
 # #   sum: @sum,
@@ -86,20 +87,20 @@ describe 'rol() multiple attribute definitions' do
 end
 
 
+describe 'rol() argument validation' do
+  it 'raises an exception when the argument does not respond to #each_pair' do
+    exception = proc { rol([1,2,3]) }.must_raise ArgumentError
+    exception.message.must_equal "rol(hash): 'hash' argument must respond to #each_pair"
+  end
+end
+
+
 describe 'rol() attribute definition' do
   before do
     @o = rol({ Capitalized: 42 })
   end
   it 'allows capitalized attribute names' do
     @o.methods.must_include :Capitalized
-  end
-end
-
-
-describe 'rol() argument validation' do
-  it 'raises an exception when the argument does not respond to #each_pair' do
-    exception = proc { rol([1,2,3]) }.must_raise ArgumentError
-    exception.message.must_equal "rol(hash): 'hash' argument must respond to #each_pair"
   end
 end
 
@@ -111,6 +112,22 @@ describe 'rol() attribute names' do
   end
   it 'does not do any validation of attribute names' do
     @o.methods.must_include @attribute_name.to_sym
+  end
+end
+
+
+describe 'rol() method definition' do
+  before do
+    @o = rol({ my_method: -> (x) { x * 2 } })
+  end
+  it 'allows a method to be defined' do
+    @o.methods.must_include :my_method
+  end
+  it 'defines the method as read-only' do
+    @o.methods.wont_include :my_method=
+  end
+  it 'defines a method that can actually be called' do
+    @o.my_method(3).must_equal 6
   end
 end
 
