@@ -10,12 +10,18 @@ end
 
 module Rol
   def self.rol(hash = {})
-    raise ArgumentError.new("rol(hash): 'hash' argument must respond to #each_pair") unless hash.respond_to?(:each_pair)
+    check_arg(hash)
     o = Object.new
     hash.each_pair do |key, value|
       # TODO: need to check what happens if either key or value is invalid.
       o.define_singleton_method(key) { value }
     end
     o
+  end
+
+  private
+
+  def self.check_arg(hash)
+    raise ArgumentError.new("rol(hash): 'hash' argument must respond to #each_pair") unless hash.respond_to?(:each_pair)
   end
 end
