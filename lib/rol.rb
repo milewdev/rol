@@ -9,13 +9,12 @@ module Kernel
 end
 
 module Rol
-  def self.rol(hash = nil)
+  def self.rol(hash = {})
     # TODO: need to check the type of hash; must be a hash
     o = Object.new
-    if hash   # TODO: use 'hash = {}' in the arg list instead
-      hash.each do |key, value|
-        o.define_singleton_method(key) { value }
-      end
+    hash.each do |key, value|
+      # TODO: need to check what happens if either key or value is invalid.
+      o.define_singleton_method(key) { value }
     end
     o
   end
