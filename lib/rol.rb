@@ -22,6 +22,10 @@ module Rol
   private
 
   def self.check_arg(hash)
-    raise ArgumentError.new("rol(hash): 'hash' argument must respond to #each_pair") unless hash.respond_to?(:each_pair)
+    raise_not_a_hash_argument_error unless hash.respond_to?(:each_pair)
+  end
+
+  def self.raise_not_a_hash_argument_error
+    raise ArgumentError.new("rol(hash): 'hash' argument must respond to #each_pair")
   end
 end
