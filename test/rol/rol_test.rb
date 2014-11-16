@@ -15,9 +15,6 @@ require_relative '../test_helper'
 # end
 
 
-#
-# o = rol()   # o is an instance of Object
-#
 describe 'rol() return value' do
   before do
     @o = rol()
@@ -28,29 +25,21 @@ describe 'rol() return value' do
 end
 
 
-#
-# o = rol()   # returns an instance of Object with no additional methods or attributes
-#
 describe 'rol() with no arguments' do
   before do
     @o = rol()
-    @vanila = Object.new
+    @vanila_object = Object.new
   end
-  it 'allows nothing to be defined' do
+  it 'returns an object' do
     @o.wont_be_nil
   end
   it 'returns an instance of Object with no additional attributes or methods' do
-    @o.methods.must_equal @vanila.methods
-    @o.instance_variables.must_equal @vanila.instance_variables
+    @o.methods.must_equal @vanila_object.methods
+    @o.instance_variables.must_equal @vanila_object.instance_variables
   end
 end
 
 
-#
-# o =rol({ x: 42 })
-# puts o.x            # 42
-# o.x = 43            # raises NoMethodError: x=
-#
 describe 'rol() attribute definition' do
   before do
     @o = rol({ x: 42})
@@ -70,12 +59,6 @@ describe 'rol() attribute definition' do
 end
 
 
-#
-# o = rol({ name: 'Fluffy', age: 3 })
-# puts o.name         # Fluffy
-# puts o.age          # 3
-# o.age = 4           # raises NoMethodError: age=
-#
 describe 'rol() multiple attribute definitions' do
   before do
     @o = rol({ a_number: 1, a_boolean: true, a_string: 'hi' })
@@ -103,8 +86,18 @@ describe 'rol() multiple attribute definitions' do
 end
 
 
+describe 'rol() attribute definition' do
+  before do
+    @o = rol({ Capitalized: 42 })
+  end
+  it 'allows capitalized attribute names' do
+    @o.methods.must_include :Capitalized
+  end
+end
+
+
 #
-# TODO: what does rol({ UPPER_CASE: 42 }) mean?
+# TODO: what does rol( <SOMETHING OTHER THAN A HASH> ) do?
 #
 
 
