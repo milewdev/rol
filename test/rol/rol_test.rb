@@ -1,18 +1,16 @@
 require_relative '../test_helper'
 
 
-# #
-# # o = rol({
-# #   sum: @sum,
-# #   initialize: -> { @sum = 0 },
-# #   add: -> (amount) { @sum += amount }
-# # })
-# # puts o.sum    # 0
-# # o.add(3)
-# # puts o.sum    # 3
-# #
 # describe 'what is rol()' do
-#   it 'provides a shorthand way to create an object on the fly'
+#   before do
+#     @o = rol({
+#       name: 'Fluffy',
+#       greet: -> (your_name) { "Hi #{your_name}!  My name is #{name}!" }
+#     })
+#   end
+#   it 'provides a shorthand way to create an object on the fly' do
+#     @o.greet('Spot').must_equal 'Hi Spot! name is Fluffy!'
+#   end
 # end
 
 
