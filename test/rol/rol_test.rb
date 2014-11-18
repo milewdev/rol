@@ -1,17 +1,17 @@
 require_relative '../test_helper'
 
 
-# describe 'what is rol()' do
-#   before do
-#     @o = rol({
-#       name: 'Fluffy',
-#       greet: -> (your_name) { "Hi #{your_name}!  My name is #{name}!" }
-#     })
-#   end
-#   it 'provides a shorthand way to create an object on the fly' do
-#     @o.greet('Spot').must_equal 'Hi Spot! name is Fluffy!'
-#   end
-# end
+describe 'what is rol()' do
+  before do
+    @o = rol({
+      name: 'Fluffy',
+      greet: -> (your_name) { "Hi #{your_name}! My name is #{name}!" }
+    })
+  end
+  it 'provides a shorthand way to create an object on the fly' do
+    @o.greet('Spot').must_equal 'Hi Spot! My name is Fluffy!'
+  end
+end
 
 
 describe 'rol() return value' do
