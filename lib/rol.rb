@@ -2,11 +2,13 @@
 me = File.absolute_path(__FILE__)
 Dir.glob(File.dirname(me) + '/**/*.rb') {|fn| require fn unless fn == me }
 
+
 module Kernel
   def rol(*args)
     Rol.rol(*args)
   end
 end
+
 
 module Rol
   def self.rol(hash = {})
