@@ -40,6 +40,7 @@ module Rol
     if value.is_a? Proc
       object.define_singleton_method(name) { |*args| object.instance_exec(*args, &value) }
     else
+      raise ArgumentError.new("rol(hash): attribute name '#{name}' must not end with =") if name.to_s.end_with?('=')
       object.define_singleton_method(name) { value }
     end
   end

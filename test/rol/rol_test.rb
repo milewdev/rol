@@ -111,12 +111,9 @@ end
 
 
 describe 'rol() attribute names' do
-  before do
-    @attribute_name = '~`1!2@3#4$5%6^7&8*9(0)-_=+{[]}|\:;<,>.?/'
-    @o = rol({ @attribute_name => 42 })
-  end
-  it 'does not do any validation of attribute names' do
-    @o.methods.must_include @attribute_name.to_sym
+  it 'raises an exception if the attribute name ends with =' do
+    exception = proc { rol({ 'name=' => 42 }) }.must_raise ArgumentError
+    exception.message.must_equal "rol(hash): attribute name 'name=' must not end with ="
   end
 end
 
@@ -147,6 +144,13 @@ describe 'rol() method definition' do
   end
   it 'invokes the method in the context of the object' do
     @o.area.must_equal 6
+  end
+end
+
+
+describe 'rol() method names' do
+  it 'does not raise an exception if the method name ends with =' do
+    rol({ 'name=' => -> {} })
   end
 end
 
