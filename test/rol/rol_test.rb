@@ -14,6 +14,13 @@ describe 'what is rol()' do
 end
 
 
+describe 'Rol.Version' do
+  it 'returns the rol() version' do
+    Rol::Version.must_equal '0.0.1'
+  end
+end
+
+
 describe 'rol() return value' do
   before do
     @o = rol()
