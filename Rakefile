@@ -3,12 +3,9 @@ require "pathname"
 require_relative "lib/rol/version"
 
 
-task :default => [ :test ]
-task :install => [ :build ]
-
-
-desc "Run test, build, and install tasks"
-task :all => [ :test, :build, :install ]
+task :default do
+  system "rake -T"
+end
 
 
 Rake::TestTask.new :test do |t|
@@ -23,8 +20,8 @@ task :build do
 end
 
 
-desc "Install gem locally (does an uninstall first)"
-task :install => :uninstall do
+desc "Install gem locally"
+task :install => :build do
   system "gem install rol-#{Rol::Version}.gem"
 end
 
