@@ -26,10 +26,14 @@ module Rol
 
   def self.build_object(hash)
     object = Object.new
+    add_members(object, hash)
+    object
+  end
+  
+  def self.add_members(object, hash)
     hash.each_pair do |name, value|
       add_member(object, name, value)
     end
-    object
   end
 
   def self.add_member(object, name, value)
