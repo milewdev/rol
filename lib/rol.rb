@@ -25,14 +25,14 @@ module Rol
   end
 
   def self.build_object(hash)
-    o = Object.new
+    object = Object.new
     hash.each_pair do |key, value|
       if value.is_a? Proc
-        o.define_singleton_method(key) { |*args| o.instance_exec(*args, &value) }
+        object.define_singleton_method(key) { |*args| object.instance_exec(*args, &value) }
       else
-        o.define_singleton_method(key) { value }
+        object.define_singleton_method(key) { value }
       end
     end
-    o
+    object
   end
 end
