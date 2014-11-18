@@ -40,9 +40,13 @@ module Rol
     if value.is_a? Proc
       object.define_singleton_method(name) { |*args| object.instance_exec(*args, &value) }
     else
-      check_attribute_name(name)
-      object.define_singleton_method(name) { value }
+      add_attribute_member(object, name, value)
     end
+  end
+
+  def self.add_attribute_member(object, name, value)
+    check_attribute_name(name)
+    object.define_singleton_method(name) { value }
   end
 
   def self.check_attribute_name(name)
