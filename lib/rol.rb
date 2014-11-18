@@ -29,11 +29,9 @@ module Rol
     add_members(object, hash)
     object
   end
-  
+
   def self.add_members(object, hash)
-    hash.each_pair do |name, value|
-      add_member(object, name, value)
-    end
+    hash.each_pair { |name, value| add_member(object, name, value) }
   end
 
   def self.add_member(object, name, value)
