@@ -38,10 +38,14 @@ module Rol
 
   def self.add_member(object, name, value)
     if value.is_a? Proc
-      object.define_singleton_method(name) { |*args| object.instance_exec(*args, &value) }
+      add_method_member(object, name, value)
     else
       add_attribute_member(object, name, value)
     end
+  end
+
+  def self.add_method_member(object, name, proc)
+    object.define_singleton_method(name) { |*args| object.instance_exec(*args, &proc) }
   end
 
   def self.add_attribute_member(object, name, value)
