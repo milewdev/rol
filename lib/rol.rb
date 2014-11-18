@@ -11,15 +11,7 @@ end
 module Rol
   def self.rol(hash = {})
     check_arg(hash)
-    o = Object.new
-    hash.each_pair do |key, value|
-      if value.is_a? Proc
-        o.define_singleton_method(key) { |*args| o.instance_exec(*args, &value) }
-      else
-        o.define_singleton_method(key) { value }
-      end
-    end
-    o
+    build_object(hash)
   end
 
   private
@@ -30,5 +22,17 @@ module Rol
 
   def self.raise_not_a_hash_argument_error
     raise ArgumentError.new("rol(hash): 'hash' argument must respond to #each_pair")
+  end
+
+  def self.build_object(hash)
+    o = Object.new
+    hash.each_pair do |key, value|
+      if value.is_a? Proc
+        o.define_singleton_method(key) { |*args| o.instance_exec(*args, &value) }
+      else
+        o.define_singleton_method(key) { value }
+      end
+    end
+    o
   end
 end
