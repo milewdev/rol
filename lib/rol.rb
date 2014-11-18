@@ -40,9 +40,13 @@ module Rol
     if value.is_a? Proc
       object.define_singleton_method(name) { |*args| object.instance_exec(*args, &value) }
     else
-      raise_ends_with_equals_argument_error(name) if name.to_s.end_with?('=')
+      check_attribute_name(name)
       object.define_singleton_method(name) { value }
     end
+  end
+
+  def self.check_attribute_name(name)
+    raise_ends_with_equals_argument_error(name) if name.to_s.end_with?('=')
   end
 
   def self.raise_ends_with_equals_argument_error(name)
