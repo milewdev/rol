@@ -13,7 +13,6 @@ module Rol
     check_arg(hash)
     o = Object.new
     hash.each_pair do |key, value|
-      # TODO: need to check what happens if either key or value is invalid.
       if value.is_a? Proc
         o.define_singleton_method(key) { |*args| o.instance_exec(*args, &value) }
       else
