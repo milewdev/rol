@@ -27,12 +27,16 @@ module Rol
   def self.build_object(hash)
     object = Object.new
     hash.each_pair do |name, value|
-      if value.is_a? Proc
-        object.define_singleton_method(name) { |*args| object.instance_exec(*args, &value) }
-      else
-        object.define_singleton_method(name) { value }
-      end
+      add_member(object, name, value)
     end
     object
+  end
+
+  def self.add_member(object, name, value)
+    if value.is_a? Proc
+      object.define_singleton_method(name) { |*args| object.instance_exec(*args, &value) }
+    else
+      object.define_singleton_method(name) { value }
+    end
   end
 end
