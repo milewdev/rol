@@ -130,6 +130,20 @@ describe 'rol() method definition' do
 end
 
 
+describe 'rol() method definition' do
+  before do
+    @o = rol({
+      height: 2,
+      width: 3,
+      area: -> { height * width }
+    })
+  end
+  it 'invokes the method in the context of the object' do
+    @o.area.must_equal 6
+  end
+end
+
+
 #
 # Provide Kernel.rol() as an alias for Rol.rol():
 #

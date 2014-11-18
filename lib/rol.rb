@@ -15,7 +15,7 @@ module Rol
     hash.each_pair do |key, value|
       # TODO: need to check what happens if either key or value is invalid.
       if value.is_a? Proc
-        o.define_singleton_method(key) { |*args| value.call(*args) }
+        o.define_singleton_method(key) { |*args| o.instance_exec(*args, &value) }
       else
         o.define_singleton_method(key) { value }
       end
