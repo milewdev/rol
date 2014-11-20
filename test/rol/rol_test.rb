@@ -1,15 +1,28 @@
 require_relative '../test_helper'
 
 
-describe 'what is rol()' do
-  before do
-    @o = rol({
+describe 'assumptions about Object' do
+  [ :name, :greet, :x, :Capitalized, :first, :second, :third, :my_method, :height, :width, :area ].each do |name|
+    it "does not have an attribute called :#{name}" do
+      Object.new.instance_variables.wont_include name
+    end
+    it "does not have a method called :#{name}" do
+      Object.new.methods.wont_include name
+    end
+    it "does not have a method called :#{name}=" do
+      Object.new.methods.wont_include "#{name}=".to_sym
+    end
+  end
+end
+
+
+describe 'rol()' do
+  it 'provides a shorthand way to create an object on the fly' do
+    object = rol({
       name: 'Fluffy',
       greet: -> (your_name) { "Hi #{your_name}! My name is #{name}!" }
     })
-  end
-  it 'provides a shorthand way to create an object on the fly' do
-    @o.greet('Spot').must_equal 'Hi Spot! My name is Fluffy!'
+    object.greet('Spot').must_equal 'Hi Spot! My name is Fluffy!'
   end
 end
 
@@ -21,78 +34,10 @@ describe 'Rol.Version' do
 end
 
 
-describe 'rol() return value' do
-  before do
-    @o = rol()
+describe 'rol() arguments' do
+  it 'returns an instance of Object with no additional methods when no arguments are supplied' do
+    rol().methods.must_equal Object.new.methods
   end
-  it 'returns an instance of Object' do
-    @o.class.must_equal Object
-  end
-end
-
-
-describe 'rol() with no arguments' do
-  before do
-    @o = rol()
-    @vanila_object = Object.new
-  end
-  it 'returns an object' do
-    @o.wont_be_nil
-  end
-  it 'returns an instance of Object with no additional attributes or methods' do
-    @o.methods.must_equal @vanila_object.methods
-    @o.instance_variables.must_equal @vanila_object.instance_variables
-  end
-end
-
-
-describe 'rol() attribute definition' do
-  before do
-    @o = rol({ x: 42})
-  end
-  it 'allows an attribute to be defined' do
-    @o.methods.must_include :x
-  end
-  it 'preserves the type of the attribute' do
-    @o.x.class.must_equal 42.class
-  end
-  it 'preserves the value of the attribute' do
-    @o.x.must_equal 42
-  end
-  it 'defines the attribute as read-only' do
-    @o.methods.wont_include :x=
-  end
-end
-
-
-describe 'rol() multiple attribute definitions' do
-  before do
-    @o = rol({ a_number: 1, a_boolean: true, a_string: 'hi' })
-  end
-  it 'allows many attributes to be defined' do
-    @o.methods.must_include :a_number
-    @o.methods.must_include :a_boolean
-    @o.methods.must_include :a_string
-  end
-  it 'preserves the type of each attribute' do
-    @o.a_number.class.must_equal 1.class
-    @o.a_boolean.class.must_equal true.class
-    @o.a_string.class.must_equal 'hi'.class
-  end
-  it 'preserves the value of each attribute' do
-    @o.a_number.must_equal 1
-    @o.a_boolean.must_equal true
-    @o.a_string.must_equal 'hi'
-  end
-  it 'defines each attribute as read-only' do
-    @o.methods.wont_include :a_number=
-    @o.methods.wont_include :a_boolean=
-    @o.methods.wont_include :a_string=
-  end
-end
-
-
-describe 'rol() argument validation' do
   it 'raises an exception when the argument does not respond to #each_pair' do
     exception = proc { rol([1,2,3]) }.must_raise ArgumentError
     exception.message.must_equal "rol(hash): 'hash' argument must respond to #each_pair"
@@ -100,17 +45,36 @@ describe 'rol() argument validation' do
 end
 
 
+describe 'rol() return value' do
+  it 'returns an instance of Object' do
+    rol().class.must_equal Object
+  end
+end
+
+
 describe 'rol() attribute definition' do
   before do
-    @o = rol({ Capitalized: 42 })
+    @object = rol({ x: 42})
   end
-  it 'allows capitalized attribute names' do
-    @o.methods.must_include :Capitalized
+  it 'allows an attribute to be defined' do
+    @object.methods.must_include :x
+  end
+  it 'preserves the type of the attribute' do
+    @object.x.class.must_equal 42.class
+  end
+  it 'preserves the value of the attribute' do
+    @object.x.must_equal 42
+  end
+  it 'defines the attribute as read-only' do
+    @object.methods.wont_include :x=
   end
 end
 
 
 describe 'rol() attribute names' do
+  it 'allows capitalized attribute names' do
+    rol({ Capitalized: 42 }).methods.must_include :Capitalized
+  end
   it 'raises an exception if the attribute name ends with =' do
     exception = proc { rol({ 'name=' => 42 }) }.must_raise ArgumentError
     exception.message.must_equal "rol(hash): attribute name 'name=' must not end with ="
@@ -118,32 +82,28 @@ describe 'rol() attribute names' do
 end
 
 
-describe 'rol() method definition' do
-  before do
-    @o = rol({ my_method: -> (x) { x * 2 } })
-  end
-  it 'allows a method to be defined' do
-    @o.methods.must_include :my_method
-  end
-  it 'defines the method as read-only' do
-    @o.methods.wont_include :my_method=
-  end
-  it 'defines a method that can actually be called' do
-    @o.my_method(3).must_equal 6
+describe 'rol() multiple attribute definitions' do
+  it 'allows many attributes to be defined' do
+    object = rol({ first: 1, second: 2, third: 3 })
+    object.methods.must_include :first
+    object.methods.must_include :second
+    object.methods.must_include :third
   end
 end
 
 
 describe 'rol() method definition' do
   before do
-    @o = rol({
-      height: 2,
-      width: 3,
-      area: -> { height * width }
-    })
+    @object = rol({ my_method: -> (x) { x * 2 } })
   end
-  it 'invokes the method in the context of the object' do
-    @o.area.must_equal 6
+  it 'allows a method to be defined' do
+    @object.methods.must_include :my_method
+  end
+  it 'defines the method as read-only' do
+    @object.methods.wont_include :my_method=
+  end
+  it 'defines a method that can actually be called' do
+    @object.my_method(3).must_equal 6
   end
 end
 
@@ -151,6 +111,18 @@ end
 describe 'rol() method names' do
   it 'does not raise an exception if the method name ends with =' do
     rol({ 'name=' => -> {} })
+  end
+end
+
+
+describe 'rol() method invocation' do
+  it 'invokes the method in the context of the object' do
+    object = rol({
+      height: 2,
+      width: 3,
+      area: -> { height * width }
+    })
+    object.area.must_equal 6
   end
 end
 
