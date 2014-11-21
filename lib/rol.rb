@@ -44,8 +44,8 @@ module Rol
     end
   end
 
-  def self.add_method_member(object, name, proc)
-    object.define_singleton_method(name) { |*args| object.instance_exec(*args, &proc) }
+  def self.add_method_member(object, method_name, proc)
+    object.define_singleton_method(method_name) { |*args| object.instance_exec(*args, &proc) }
   end
 
   def self.add_attribute_member(object, attribute_name, value)
