@@ -48,20 +48,20 @@ module Rol
     object.define_singleton_method(name) { |*args| object.instance_exec(*args, &proc) }
   end
 
-  def self.add_attribute_member(object, name, value)
-    check_attribute_name(name)
-    instance_variable_name = build_instance_variable_name(name)
-    add_attribute_getter_method(object, name, instance_variable_name)
-    add_attribute_setter_method(object, name, instance_variable_name)
+  def self.add_attribute_member(object, attribute_name, value)
+    check_attribute_name(attribute_name)
+    instance_variable_name = build_instance_variable_name(attribute_name)
+    add_attribute_getter_method(object, attribute_name, instance_variable_name)
+    add_attribute_setter_method(object, attribute_name, instance_variable_name)
     initialize_attribute(object, instance_variable_name, value)
   end
 
-  def self.check_attribute_name(name)
-    raise_ends_with_equals_argument_error(name) if name.to_s.end_with?('=')
+  def self.check_attribute_name(attribute_name)
+    raise_ends_with_equals_argument_error(attribute_name) if attribute_name.to_s.end_with?('=')
   end
 
-  def self.raise_ends_with_equals_argument_error(name)
-    raise ArgumentError.new("rol(hash): attribute name '#{name}' must not end with =")
+  def self.raise_ends_with_equals_argument_error(attribute_name)
+    raise ArgumentError.new("rol(hash): attribute name '#{attribute_name}' must not end with =")
   end
 
   def self.build_instance_variable_name(attribute_name)
