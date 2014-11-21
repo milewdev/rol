@@ -50,10 +50,10 @@ module Rol
 
   def self.add_attribute_member(object, name, value)
     check_attribute_name(name)
-    instance_variable = build_instance_variable_name(name)
-    object.instance_variable_set(instance_variable, value)
-    object.define_singleton_method(name) { instance_variable_get(instance_variable) } # TODO: is there a better way?
-    object.define_singleton_method("#{name}=") { |value| instance_variable_set(instance_variable, value) }
+    instance_variable_name = build_instance_variable_name(name)
+    object.instance_variable_set(instance_variable_name, value)
+    object.define_singleton_method(name) { instance_variable_get(instance_variable_name) } # TODO: is there a better way?
+    object.define_singleton_method("#{name}=") { |value| instance_variable_set(instance_variable_name, value) }
   end
 
   def self.check_attribute_name(name)
