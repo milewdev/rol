@@ -50,7 +50,7 @@ module Rol
 
   def self.add_attribute_member(object, name, value)
     check_attribute_name(name)
-    instance_variable = "@#{name}".to_sym
+    instance_variable = build_instance_variable_name(name)
     object.instance_variable_set(instance_variable, value)
     object.define_singleton_method(name) { instance_variable_get(instance_variable) } # TODO: is there a better way?
     object.define_singleton_method("#{name}=") { |value| instance_variable_set(instance_variable, value) }
@@ -62,5 +62,9 @@ module Rol
 
   def self.raise_ends_with_equals_argument_error(name)
     raise ArgumentError.new("rol(hash): attribute name '#{name}' must not end with =")
+  end
+
+  def self.build_instance_variable_name(attribute_name)
+    "@#{attribute_name}".to_sym
   end
 end
