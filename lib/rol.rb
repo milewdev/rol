@@ -45,7 +45,9 @@ module Rol
   end
 
   def self.add_method_member(object, method_name, proc)
-    object.define_singleton_method(method_name) { |*args| object.instance_exec(*args, &proc) }
+    object.define_singleton_method(method_name) do |*args|
+      object.instance_exec(*args, &proc)
+    end
   end
 
   def self.add_attribute_member(object, attribute_name, value)
@@ -69,11 +71,15 @@ module Rol
   end
 
   def self.add_attribute_getter_method(object, attribute_name, instance_variable_name)
-    object.define_singleton_method(attribute_name) { instance_variable_get(instance_variable_name) } # TODO: is there a better way?
+    object.define_singleton_method(attribute_name) do
+      instance_variable_get(instance_variable_name)
+    end
   end
 
   def self.add_attribute_setter_method(object, attribute_name, instance_variable_name)
-    object.define_singleton_method("#{attribute_name}=") { |value| instance_variable_set(instance_variable_name, value) }
+    object.define_singleton_method("#{attribute_name}=") do |value|
+      instance_variable_set(instance_variable_name, value)
+    end
   end
 
   def self.initialize_attribute(object, instance_variable_name, value)
