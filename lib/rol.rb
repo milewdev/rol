@@ -52,7 +52,7 @@ module Rol
     check_attribute_name(name)
     instance_variable_name = build_instance_variable_name(name)
     object.instance_variable_set(instance_variable_name, value)
-    object.define_singleton_method(name) { instance_variable_get(instance_variable_name) } # TODO: is there a better way?
+    add_attribute_getter_method(object, name, instance_variable_name)
     add_attribute_setter_method(object, name, instance_variable_name)
   end
 
@@ -66,6 +66,10 @@ module Rol
 
   def self.build_instance_variable_name(attribute_name)
     "@#{attribute_name}".to_sym
+  end
+
+  def self.add_attribute_getter_method(object, attribute_name, instance_variable_name)
+    object.define_singleton_method(attribute_name) { instance_variable_get(instance_variable_name) } # TODO: is there a better way?
   end
 
   def self.add_attribute_setter_method(object, attribute_name, instance_variable_name)
