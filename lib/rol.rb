@@ -77,7 +77,8 @@ module Rol
   end
 
   def self.add_attribute_setter_method(object, attribute_name, instance_variable_name)
-    object.define_singleton_method("#{attribute_name}=") do |value|
+    method_name = "#{attribute_name}="
+    object.define_singleton_method(method_name) do |value|
       instance_variable_set(instance_variable_name, value)
     end
   end
