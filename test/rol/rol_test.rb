@@ -20,7 +20,7 @@ describe 'rol()' do
   it 'provides a shorthand way to create an object on the fly' do
     object = rol({
       name: 'Fluffy',
-      greet: -> (your_name) { "Hi #{your_name}! My name is #{name}!" }
+      greet: -> (your_name) { "Hi #{your_name}! My name is #{@name}!" }
     })
     object.greet('Spot').must_equal 'Hi Spot! My name is Fluffy!'
   end
@@ -56,17 +56,17 @@ describe 'rol() attribute definition' do
   before do
     @object = rol({ x: 42})
   end
-  it 'allows an attribute to be defined' do
+  it 'creates the attribute' do
+    @object.instance_variables.must_include :@x
+  end
+  it 'creates a get method for the attribute' do
     @object.methods.must_include :x
   end
-  it 'preserves the type of the attribute' do
-    @object.x.class.must_equal 42.class
+  it 'creates a set method for the attribute' do
+    @object.methods.must_include :x=
   end
-  it 'preserves the value of the attribute' do
-    @object.x.must_equal 42
-  end
-  it 'defines the attribute as read-only' do
-    @object.methods.wont_include :x=
+  it 'sets the initial value of the attribute' do
+    @object.instance_variable_get(:@x).must_equal 42
   end
 end
 
@@ -120,7 +120,7 @@ describe 'rol() method invocation' do
     object = rol({
       height: 2,
       width: 3,
-      area: -> { height * width }
+      area: -> { @height * @width }
     })
     object.area.must_equal 6
   end
