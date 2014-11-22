@@ -76,12 +76,12 @@ module Rol
   #
   # object.my_attribute = initial_value
   #
-  def self.add_attribute_member(object, attribute_name, value)    # TODO: rename to initial_value
+  def self.add_attribute_member(object, attribute_name, initial_value)
     check_attribute_name(attribute_name)
     instance_variable_name = build_instance_variable_name(attribute_name)
     add_attribute_getter_method(object, attribute_name, instance_variable_name)
     add_attribute_setter_method(object, attribute_name, instance_variable_name)
-    initialize_attribute(object, instance_variable_name, value)
+    initialize_attribute(object, instance_variable_name, initial_value)
   end
 
   def self.check_attribute_name(attribute_name)
