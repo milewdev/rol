@@ -1,8 +1,13 @@
+#
 # 'require' all files except ourselves.
+#
 me = File.absolute_path(__FILE__)
 Dir.glob(File.dirname(me) + '/**/*.rb') {|fn| require fn unless fn == me }
 
 
+#
+# Save some typing by making rol() syntactic sugar for Rol.rol()
+#
 module Kernel
   def rol(*args)
     Rol.rol(*args)
@@ -10,6 +15,11 @@ module Kernel
 end
 
 
+#
+# Module Rol (Ruby object literal) provides the utility method rol() that
+# creates an object instance from a hash, similar to the way objects can
+# created in JavaScript.
+#
 module Rol
   def self.rol(hash = {})
     check_arg(hash)
@@ -44,13 +54,29 @@ module Rol
     end
   end
 
+  #
+  # def object.my_method(arg1, arg2, ...)
+  #   ...
+  # end
+  #
   def self.add_method_member(object, method_name, proc)
     object.define_singleton_method(method_name) do |*args|
       object.instance_exec(*args, &proc)
     end
   end
 
-  def self.add_attribute_member(object, attribute_name, value)
+  #
+  # def object.my_attribute
+  #   @my_attribute
+  # end
+  #
+  # def object.my_attribute=(value)
+  #   @my_attribute = value
+  # end
+  #
+  # object.my_attribute = initial_value
+  #
+  def self.add_attribute_member(object, attribute_name, value)    # TODO: rename to initial_value
     check_attribute_name(attribute_name)
     instance_variable_name = build_instance_variable_name(attribute_name)
     add_attribute_getter_method(object, attribute_name, instance_variable_name)
@@ -66,16 +92,29 @@ module Rol
     raise ArgumentError.new("rol(hash): attribute name '#{attribute_name}' must not end with =")
   end
 
+  #
+  # 'my_attribute' => :@my_attribute
+  #
   def self.build_instance_variable_name(attribute_name)
     "@#{attribute_name}".to_sym
   end
 
+  #
+  # def object.my_attribute
+  #   @my_attribute
+  # end
+  #
   def self.add_attribute_getter_method(object, attribute_name, instance_variable_name)
     object.define_singleton_method(attribute_name) do
       instance_variable_get(instance_variable_name)
     end
   end
 
+  #
+  # def object.my_attribute=(value)
+  #   @my_attribute = value
+  # end
+  #
   def self.add_attribute_setter_method(object, attribute_name, instance_variable_name)
     method_name = "#{attribute_name}="
     object.define_singleton_method(method_name) do |value|
@@ -83,7 +122,10 @@ module Rol
     end
   end
 
-  def self.initialize_attribute(object, instance_variable_name, value)
+  #
+  # object.my_attribute = initial_value
+  #
+  def self.initialize_attribute(object, instance_variable_name, value)    # TODO: rename to initial_value
     object.instance_variable_set(instance_variable_name, value)
   end
 end
