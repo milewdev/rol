@@ -125,7 +125,7 @@ module Rol
   #
   # object.my_attribute = initial_value
   #
-  def self.initialize_attribute(object, instance_variable_name, value)    # TODO: rename to initial_value
-    object.instance_variable_set(instance_variable_name, value)
+  def self.initialize_attribute(object, instance_variable_name, initial_value)
+    object.instance_variable_set(instance_variable_name, initial_value)
   end
 end
