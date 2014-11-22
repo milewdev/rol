@@ -3,9 +3,7 @@ require "pathname"
 require_relative "lib/rol/version"
 
 
-task :default do
-  system "rake -T"
-end
+task :default => :test
 
 
 Rake::TestTask.new :test do |t|
