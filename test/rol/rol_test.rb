@@ -64,7 +64,7 @@ end
 
 describe 'defining an attribute' do
   before do
-    @object = rol({ x: 42})
+    @object = rol({ x: 42 })
   end
   it 'creates the attribute' do
     @object.instance_variables.must_include :@x
@@ -77,6 +77,23 @@ describe 'defining an attribute' do
   end
   it 'sets the initial value of the attribute' do
     @object.instance_variable_get(:@x).must_equal 42
+  end
+end
+
+
+describe 'attribute get method' do
+  it 'returns the value of the attibute' do
+    @object = rol({ x: 42 })
+    @object.x.must_equal 42
+  end
+end
+
+
+describe 'attribute set method' do
+  it 'sets the value of the attribute' do
+    @object = rol({ x: 42 })
+    @object.x = 24
+    @object.instance_variable_get(:@x).must_equal 24
   end
 end
 
