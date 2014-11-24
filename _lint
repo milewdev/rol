@@ -6,8 +6,6 @@
 # Warning: the checks are not sophisticated.
 #
 
-echo '--------------------------------------------------------------------------------'
-
 echo 'Check for capitalization in test descriptions ...'
 egrep -rn $'(describe|it)[ ]+[\'"][A-Z]' test/*.rb
 
