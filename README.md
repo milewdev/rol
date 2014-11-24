@@ -5,7 +5,7 @@
 [![Dependencies](https://gemnasium.com/milewdev/rol.svg)](https://gemnasium.com/milewdev/rol)
 
 
-### What is rol?
+#### What is rol?
 rol defines Ruby objects from a hash of attributes and methods:
 
 ```ruby
@@ -29,26 +29,130 @@ puts object.width, object.height, object.area   # => 40 30 1200
 ```
 
 
-### Installation
+#### Installation
 
 Install:
 
 ```shell
-gem install rol
+$ gem install rol
 ```
 
 Uninstall:
 
 ```shell
-gem uninstall rol
+$ gem uninstall rol
 ```
 
 
-### Development Documentation
+#### Usage
+
+rol provides a quick way to create objects on the fly without having to create
+a full class.  For example, the following creates an object with an attribute x
+that is initialized to the value 3:
+
+```ruby
+require 'rol'
+coord = rol({ x: 3 })
+puts coord.x  # => 3
+```
+
+Attributes can be assigned to:
+
+```ruby
+require 'rol'
+coord = rol({ x: 3 })
+puts coord.x  # => 3
+coord.x = 7
+puts coord.x  # => 7
+```
+
+Methods can also be defined:
+
+```ruby
+require 'date'
+require 'rol'
+today = rol({ formatted: -> { Date.today.strftime('%Y.%m.%d') } })
+puts today.formatted  # => e.g. 2014.11.24
+```
+
+Here is a method that takes arguments:
+
+```ruby
+require 'rol'
+friendly = rol({ greet: -> (name) { "Hi #{name}!" } })
+puts friendly.greet('Spot')   # => Hi Spot!
+```
+
+Attributes are defined as instance variables and are therefore accessible
+from methods:
+
+```ruby
+require 'rol'
+counter = rol({
+  count: 0,
+  increment: -> { @count += 1 }
+})
+puts counter.count  # => 0
+counter.increment
+puts counter.count  # => 1
+```
+
+
+#### Equivalents
+
+Using rol to define an attribute:
+
+```ruby
+object = rol({ x: 123 })
+puts object.x  # => 123
+```
+
+is equivalent to:
+
+```ruby
+object = Object.new
+
+def object.x
+  @x
+end
+
+def object.x=(value)
+  @x = value
+end
+
+object.x = 123
+
+puts object.x  # => 123
+```
+
+Using rol to define a method:
+
+```ruby
+object = rol({
+  my_method: -> (arg) { puts arg }
+})
+
+puts object.my_method(123)  # => 123
+```
+
+is equivalent to:
+
+```ruby
+object = Object.new
+
+def object.my_method(arg)
+  puts arg
+end
+
+puts object.my_method(123)  # => 123
+```
+
+
+#### Development Documentation
 [Here](notes/development.md).
 
 
-### Thanks
+#### Thanks
 - [Apple](http://www.apple.com)
 - [GitHub](https://github.com), [GitHub pages](http://pages.github.com)
 - [Ruby](http://www.ruby-lang.org), [RubyGems](https://rubygems.org), [rake](http://rake.rubyforge.org)
