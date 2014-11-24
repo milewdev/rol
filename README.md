@@ -5,9 +5,6 @@
 [![Dependencies](https://gemnasium.com/milewdev/rol.svg)](https://gemnasium.com/milewdev/rol)
 
 
-## rol
-
-
 ### What is rol?
 rol defines Ruby objects from a hash of attributes and methods:
 
@@ -25,19 +22,22 @@ object = rol({
 })
 
 puts object.width, object.height, object.area   # => 2 3 6
+object.width = 4
+puts object.width, object.height, object.area   # => 4 3 12
 object.scale(10)
-puts object.width, object.height, object.area   # => 20 30 600
+puts object.width, object.height, object.area   # => 40 30 1200
 ```
 
 
-### Install
+### Installation
+
+Install:
 
 ```shell
 gem install rol
 ```
 
-
-### Uninstall
+Uninstall:
 
 ```shell
 gem uninstall rol
@@ -45,7 +45,7 @@ gem uninstall rol
 
 
 ### Development Documentation
-[Here](notes/development.md)
+[Here](notes/development.md).
 
 
 ### Thanks
