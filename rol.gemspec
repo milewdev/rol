@@ -4,9 +4,9 @@ Gem::Specification.new do |s|
   s.name                        = "rol"
   s.version                     = Rol::Version
   s.homepage                    = "https://github.com/milewdev/rol"
-  s.summary                     = "rol project."
+  s.summary                     = "rol defines Ruby objects from a hash of attributes and methods"
   s.description                 = <<-EOS
-                                  rol project description.
+                                  rol defines Ruby objects from a hash of attributes and methods
                                   EOS
   s.author                      = "Michael Lewandowski"
   s.email                       = "milewdev@gmail.com"
