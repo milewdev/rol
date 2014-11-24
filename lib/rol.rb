@@ -6,16 +6,6 @@ Dir.glob(File.dirname(me) + '/**/*.rb') {|fn| require fn unless fn == me }
 
 
 #
-# Save some typing by making rol() syntactic sugar for Rol.rol()
-#
-module Kernel
-  def rol(*args)
-    Rol.rol(*args)
-  end
-end
-
-
-#
 # Module Rol (Ruby object literal) provides the utility method rol() that
 # creates an object instance from a hash, similar to the way objects can
 # created in JavaScript.
