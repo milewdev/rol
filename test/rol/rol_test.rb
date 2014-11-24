@@ -34,25 +34,35 @@ describe 'Rol.Version' do
 end
 
 
-describe 'rol() arguments' do
-  it 'returns an instance of Object with no additional methods when no arguments are supplied' do
-    rol().methods.must_equal Object.new.methods
-  end
+describe 'arguments' do
   it 'raises an exception when the argument does not respond to #each_pair' do
     exception = proc { rol([1,2,3]) }.must_raise ArgumentError
     exception.message.must_equal "rol(hash): 'hash' argument must respond to #each_pair"
   end
-end
-
-
-describe 'rol() return value' do
-  it 'returns an instance of Object' do
-    rol().class.must_equal Object
+  it 'raises an exception when called with more than one argument' do
+    exception = proc { rol({}, 42) }.must_raise ArgumentError
+    exception.message.must_equal 'wrong number of arguments (2 for 0..1)'
+  end
+  it 'does not raise an exception when called with no arguments' do
+    rol()
   end
 end
 
 
-describe 'rol() attribute definition' do
+describe 'return value' do
+  it 'returns an instance of Object' do
+    rol().class.must_equal Object
+  end
+  it 'returns an instance of Object with no additional methods when no arguments are supplied' do
+    rol().methods.must_equal Object.new.methods
+  end
+  it 'returns an instance of Object with no additional methods when an empty hash is supplied' do
+    rol({}).methods.must_equal Object.new.methods
+  end
+end
+
+
+describe 'defining an attribute' do
   before do
     @object = rol({ x: 42})
   end
@@ -71,7 +81,7 @@ describe 'rol() attribute definition' do
 end
 
 
-describe 'rol() attribute names' do
+describe 'attribute names' do
   it 'allows capitalized attribute names' do
     rol({ Capitalized: 42 }).methods.must_include :Capitalized
   end
@@ -82,7 +92,7 @@ describe 'rol() attribute names' do
 end
 
 
-describe 'rol() multiple attribute definitions' do
+describe 'multiple attribute definitions' do
   it 'allows many attributes to be defined' do
     object = rol({ first: 1, second: 2, third: 3 })
     object.methods.must_include :first
@@ -92,7 +102,7 @@ describe 'rol() multiple attribute definitions' do
 end
 
 
-describe 'rol() method definition' do
+describe 'method definition' do
   before do
     @object = rol({ my_method: -> (x) { x * 2 } })
   end
@@ -108,19 +118,19 @@ describe 'rol() method definition' do
 end
 
 
-describe 'rol() method names' do
+describe 'method names' do
   it 'does not raise an exception if the method name ends with =' do
     rol({ 'name=' => -> {} })
   end
 end
 
 
-describe 'rol() method invocation' do
+describe 'method invocation' do
   it 'invokes the method in the context of the object' do
     object = rol({
       height: 2,
       width: 3,
-      area: -> { @height * @width }
+      area: -> { @height * @width }   # @height and @width must be accessible
     })
     object.area.must_equal 6
   end
