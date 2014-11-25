@@ -1,5 +1,5 @@
 ./_test
-./_lint
 ./_build
 ./_uninstall
 ./_install
+./_lint
