@@ -54,7 +54,7 @@ coord = rol({ x: 3 })
 puts coord.x  # => 3
 ```
 
-Attributes can be assigned to:
+Attributes can be assigned:
 
 ```ruby
 require 'rol'

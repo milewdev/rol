@@ -22,27 +22,22 @@ In a terminal window on the vm (guest machine):
 ```
 $ cd ~/Documents/rol
 $ ./_test
-/Users/vagrant/.rbenv/versions/2.1.2/lib/ruby/gems/2.1.0/gems/rest-client-1.6.7/lib/restclient/exceptions.rb:157: warning: assigned but unused variable - message
-/Users/vagrant/.rbenv/versions/2.1.2/lib/ruby/gems/2.1.0/gems/rest-client-1.6.7/lib/restclient/exceptions.rb:167: warning: assigned but unused variable - message
-/Users/vagrant/.rbenv/versions/2.1.2/lib/ruby/gems/2.1.0/gems/rest-client-1.6.7/lib/restclient/response.rb:11: warning: method redefined; discarding old body
-/Users/vagrant/.rbenv/versions/2.1.2/lib/ruby/gems/2.1.0/gems/rest-client-1.6.7/lib/restclient/payload.rb:47: warning: mismatched indentations at 'end' with 'case' at 40
-/Users/vagrant/.rbenv/versions/2.1.2/lib/ruby/gems/2.1.0/gems/simplecov-html-0.8.0/lib/simplecov-html.rb:58: warning: possibly useless use of a variable in void context
 [Coveralls] Set up the SimpleCov formatter.
 [Coveralls] Using SimpleCov's default settings.
-Run options: --seed 31355
+Run options: --seed 29819
 
 # Running tests:
 
 ...........................................................
 
-Finished tests in 0.016475s, 3581.1836 tests/s, 6373.2929 assertions/s.
+Finished tests in 0.017485s, 3374.3208 tests/s, 6005.1473 assertions/s.
 
 59 tests, 105 assertions, 0 failures, 0 errors, 0 skips
 [Coveralls] Outside the Travis environment, not sending data.
 ```
 
 #####Uninstall:
-**WARNING**: This will completely destroy the vm so you likely want to ensure that you have
+**WARNING**: This will destroy the vm so you likely want to ensure that you have
 pushed any and all code changes to GitHub beforehand.
 
 In a terminal window on the host machine:
