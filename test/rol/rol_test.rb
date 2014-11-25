@@ -1,6 +1,11 @@
 require_relative '../test_helper'
 
 
+#
+# In the various tests below, we add various methods to an instance
+# of Object.  Here we ensure Object does not already have those
+# methods.
+#
 describe 'assumptions about Object' do
   [ :name, :greet, :x, :Capitalized, :first, :second, :third, :my_method, :height, :width, :area ].each do |name|
     it "does not have an attribute called :#{name}" do
@@ -16,6 +21,9 @@ describe 'assumptions about Object' do
 end
 
 
+#
+# What does rol do?
+#
 describe 'rol()' do
   it 'provides a shorthand way to create an object on the fly' do
     object = rol({
@@ -27,6 +35,9 @@ describe 'rol()' do
 end
 
 
+#
+# How do I find the rol version?
+#
 describe 'Rol.Version' do
   it 'returns the rol() version' do
     Rol::Version.must_equal '0.0.1'
@@ -34,7 +45,13 @@ describe 'Rol.Version' do
 end
 
 
+#
+# What arguments does rol take and what restrictions do they have?
+#
 describe 'arguments' do
+  it 'expects one argument that behaves like a hash' do
+    rol({ x: 42 })
+  end
   it 'raises an exception when the argument does not respond to #each_pair' do
     exception = proc { rol([1,2,3]) }.must_raise ArgumentError
     exception.message.must_equal "rol(hash): 'hash' argument must respond to #each_pair"
@@ -49,6 +66,9 @@ describe 'arguments' do
 end
 
 
+#
+# What does rol return?
+#
 describe 'return value' do
   it 'returns an instance of Object' do
     rol().class.must_equal Object
@@ -62,6 +82,9 @@ describe 'return value' do
 end
 
 
+#
+# What happens when I define an attribute?
+#
 describe 'defining an attribute' do
   before do
     @object = rol({ x: 42 })
@@ -81,6 +104,9 @@ describe 'defining an attribute' do
 end
 
 
+#
+# What does the get method for an attribute do?
+#
 describe 'attribute get method' do
   it 'returns the value of the attibute' do
     @object = rol({ x: 42 })
@@ -89,6 +115,9 @@ describe 'attribute get method' do
 end
 
 
+#
+# What does the set method for an attribute do?
+#
 describe 'attribute set method' do
   it 'sets the value of the attribute' do
     @object = rol({ x: 42 })
@@ -98,6 +127,9 @@ describe 'attribute set method' do
 end
 
 
+#
+# What are the restrictions on attribute names?
+#
 describe 'attribute names' do
   it 'allows capitalized attribute names' do
     rol({ Capitalized: 42 }).methods.must_include :Capitalized
@@ -109,6 +141,9 @@ describe 'attribute names' do
 end
 
 
+#
+# Can I define more than one attribute?
+#
 describe 'multiple attribute definitions' do
   it 'allows many attributes to be defined' do
     object = rol({ first: 1, second: 2, third: 3 })
@@ -119,6 +154,9 @@ describe 'multiple attribute definitions' do
 end
 
 
+#
+# What happens when I define a method?
+#
 describe 'method definition' do
   before do
     @object = rol({ my_method: -> (x) { x * 2 } })
@@ -135,6 +173,9 @@ describe 'method definition' do
 end
 
 
+#
+# What are the restrictions on method names?
+#
 describe 'method names' do
   it 'does not raise an exception if the method name ends with =' do
     rol({ 'name=' => -> {} })
@@ -142,6 +183,9 @@ describe 'method names' do
 end
 
 
+#
+# Can methods access attributes?
+#
 describe 'method invocation' do
   it 'invokes the method in the context of the object' do
     object = rol({
@@ -159,7 +203,7 @@ end
 #
 #   o = Rol.rol({ x: 42 })
 #   o = rol({ x: 42 })      # easier to read, faster to write
-#   o = %o({ x: 42 })       # would be nicer still
+#   o = %o{ x: 42 }         # would be nicer still
 #
 describe 'Kernel.rol()' do
   it 'is defined' do
