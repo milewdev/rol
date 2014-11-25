@@ -24,3 +24,6 @@ egrep -rn ' $' lib/*.rb test/*.rb
 
 echo 'Check for git stashes ...'
 git stash list
+
+echo 'Check embedded Ruby code in README.md ...'
+ruby utils/test_readme.rb README.md

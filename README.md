@@ -21,11 +21,11 @@ object = rol({
   }
 })
 
-puts object.width, object.height, object.area   # => 2 3 6
+print object.width, ' ', object.height, ' ', object.area, "\n"  # => 2 3 6
 object.width = 4
-puts object.width, object.height, object.area   # => 4 3 12
+print object.width, ' ', object.height, ' ', object.area, "\n"  # => 4 3 12
 object.scale(10)
-puts object.width, object.height, object.area   # => 40 30 1200
+print object.width, ' ', object.height, ' ', object.area, "\n"  # => 40 30 1200
 ```
 
 
@@ -69,8 +69,8 @@ Methods can also be defined:
 ```ruby
 require 'date'
 require 'rol'
-today = rol({ formatted: -> { Date.today.strftime('%Y.%m.%d') } })
-puts today.formatted  # => e.g. 2014.11.24
+today = rol({ formatted: -> { Date.new(2014,11,24).strftime('%Y.%m.%d') } })
+puts today.formatted  # => 2014.11.24
 ```
 
 Methods can take arguments:
@@ -130,7 +130,7 @@ object = rol({
   my_method: -> (arg) { puts arg }
 })
 
-puts object.my_method(123)  # => 123
+object.my_method(123)  # => 123
 ```
 
 is equivalent to:
@@ -142,7 +142,7 @@ def object.my_method(arg)
   puts arg
 end
 
-puts object.my_method(123)  # => 123
+object.my_method(123)  # => 123
 ```
 
 
