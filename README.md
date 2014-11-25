@@ -147,7 +147,7 @@ object.my_method(123)  # => 123
 
 
 #### Development Documentation
-[Here](notes/development.md).
+[Here](notes/DEVELOPMENT_README.md).
 
 
 #### Thanks

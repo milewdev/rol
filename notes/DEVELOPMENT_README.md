@@ -52,7 +52,7 @@ $ rm -r ~/work/rol    # and possibly rm -r ~/work if it is now empty
 #####Development Notes:
 - The library entry point is Kernel.rol(), defined in lib/rol/kernel.rb; however, that simply calls Rol.rol() which is defined in lib/rol.rb.
 
-- Branch **master** contains the latest code, which may not have been released yet.  Each published release has its own branch.
+- Branch **master** contains the latest code, which may not have been released yet.  Each published release has its own branch with the name X.Y.Z, where X.Y.Z is the version number.
 
 - ./_test will run all business/unit tests.  Leave a terminal window open during development and
 run ./_test as you make changes to code.
