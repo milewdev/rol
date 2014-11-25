@@ -31,13 +31,11 @@ puts object.width, object.height, object.area   # => 40 30 1200
 
 #### Installation
 
-Install:
-
 ```shell
 $ gem install rol
 ```
 
-Uninstall:
+To uninstall:
 
 ```shell
 $ gem uninstall rol
@@ -75,7 +73,7 @@ today = rol({ formatted: -> { Date.today.strftime('%Y.%m.%d') } })
 puts today.formatted  # => e.g. 2014.11.24
 ```
 
-Here is a method that takes arguments:
+Methods can take arguments:
 
 ```ruby
 require 'rol'
@@ -89,12 +87,12 @@ from methods:
 ```ruby
 require 'rol'
 counter = rol({
-  count: 0,
-  increment: -> { @count += 1 }
+  current: 0,
+  increment: -> { @current += 1 }
 })
-puts counter.count  # => 0
+puts counter.current  # => 0
 counter.increment
-puts counter.count  # => 1
+puts counter.current  # => 1
 ```
 
 
