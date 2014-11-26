@@ -40,7 +40,7 @@ end
 #
 describe 'Rol.Version' do
   it 'returns the rol() version' do
-    Rol::Version.must_equal '0.0.1'
+    Rol::Version.must_equal '0.0.2'
   end
 end
 
