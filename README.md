@@ -6,7 +6,7 @@
 
 
 #### What is rol?
-rol defines Ruby objects from a hash of attributes and methods:
+rol creates Ruby objects from a hash of attributes and methods:
 
 ```ruby
 require 'rol'
@@ -69,8 +69,8 @@ Methods can also be defined:
 ```ruby
 require 'date'
 require 'rol'
-today = rol({ formatted: -> { Date.new(2014,11,24).strftime('%Y.%m.%d') } })
-puts today.formatted  # => 2014.11.24
+due_date = rol({ formatted: -> { Date.new(2014,11,24).strftime('%Y.%m.%d') } })
+puts due_date.formatted  # => 2014.11.24
 ```
 
 Methods can take arguments:
@@ -109,15 +109,12 @@ is equivalent to:
 
 ```ruby
 object = Object.new
-
 def object.x
   @x
 end
-
 def object.x=(value)
   @x = value
 end
-
 object.x = 123
 
 puts object.x  # => 123
@@ -137,7 +134,6 @@ is equivalent to:
 
 ```ruby
 object = Object.new
-
 def object.my_method(arg)
   puts arg
 end
